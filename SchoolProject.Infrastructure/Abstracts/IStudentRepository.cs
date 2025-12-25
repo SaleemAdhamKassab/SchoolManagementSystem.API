@@ -4,5 +4,5 @@ namespace SchoolProject.Infrastructure.Abstracts;
 
 public interface IStudentRepository
 {
-    Task<List<Student>> GetAllStudentsAsync();
+    Task<List<Student>> GetAllStudentsAsync(CancellationToken cancellationToken);
 }

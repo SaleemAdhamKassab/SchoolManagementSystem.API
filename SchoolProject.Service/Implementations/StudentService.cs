@@ -8,8 +8,8 @@ public class StudentService(IStudentRepository studentRepository) : IStudentServ
 {
     private readonly IStudentRepository _studentRepository = studentRepository;
 
-    public async Task<List<Student>> GetAllStudentsAsync()
+    public async Task<List<Student>> GetAllStudentsAsync(CancellationToken cancellationToken)
     {
-        return await _studentRepository.GetAllStudentsAsync();
+        return await _studentRepository.GetAllStudentsAsync(cancellationToken);
     }
 }

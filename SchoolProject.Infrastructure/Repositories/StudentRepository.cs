@@ -9,8 +9,8 @@ public class StudentRepository(ApplicationDbContext db) : IStudentRepository
 {
     private readonly ApplicationDbContext _db = db;
 
-    public async Task<List<Student>> GetAllStudentsAsync()
+    public async Task<List<Student>> GetAllStudentsAsync(CancellationToken cancellationToken)
     {
-        return await _db.Students.Include(e => e.Department).ToListAsync();
+        return await _db.Students.Include(e => e.Department).ToListAsync(cancellationToken);
     }
 }

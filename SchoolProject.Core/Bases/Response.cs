@@ -6,7 +6,7 @@ public class Response<T>
 {
     public Response()
     {
-        
+
     }
     public Response(T data, string message = null)
     {
@@ -14,13 +14,13 @@ public class Response<T>
         Message = message;
         Data = data;
     }
-    
+
     public Response(string message)
     {
         Succeeded = false;
         Message = message;
     }
-    
+
     public Response(string message, bool succeeded)
     {
         Succeeded = succeeded;

@@ -7,5 +7,6 @@ public partial class StudentProfile : Profile
     public StudentProfile()
     {
         GetStudentListMapping();
+        GetStudentMapping();
     }
 }

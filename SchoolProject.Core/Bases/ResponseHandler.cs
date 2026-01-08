@@ -67,6 +67,4 @@ public class ResponseHandler
             Message = message == null ? "Not Found" : message
         };
     }
-
-
 }

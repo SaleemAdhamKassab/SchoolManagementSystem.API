@@ -2,7 +2,7 @@
 
 namespace SchoolProject.Infrastructure.Abstracts;
 
-public interface IStudentRepository
+public interface IStudentRepository: IGenericRepository<Student>
 {
     Task<List<Student>> GetAllStudentsAsync(CancellationToken cancellationToken);
 }

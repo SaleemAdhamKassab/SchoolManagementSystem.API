@@ -12,6 +12,7 @@ public static class DependencyInjection
         // Register infrastructure services here
         services.AddScoped<IStudentRepository, StudentRepository>();
 
+        services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
         return services;
     }

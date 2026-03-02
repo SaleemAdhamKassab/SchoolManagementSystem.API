@@ -1,24 +1,24 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Core.Features.Students.Queries.Models;
-using SchoolProject.Core.Features.Students.Queries.Results;
+using SchoolProject.Data.AppMetaData;
 
 namespace SchoolProject.API.Controllers;
 
-[Route("api/[controller]")]
+//[Route("api/[controller]")]
 [ApiController]
 public class StudentsController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 
-    [HttpGet]
+    [HttpGet(Router.StudentRouting.List)]
     public async Task<IActionResult> GetAllStudents()
     {
         var response = await _mediator.Send(new GetStudentListQuery());
         return Ok(response);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet(Router.StudentRouting.GetById)]
     public async Task<IActionResult> GetStudentById(int id)
     {
         var response = await _mediator.Send(new GetStudentByIdQuery(id));

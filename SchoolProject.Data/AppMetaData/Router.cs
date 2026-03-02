@@ -11,8 +11,9 @@
         public static class StudentRouting
         {
             public const string Prefix = $"{Rule}/students";
-            public const string List = Prefix + "/List";
+            public const string List = $"{Prefix}/List";
             public const string GetById = Prefix + SingleRout;
+            public const string Create = $"{Prefix}/Create";
         }
     }
 }

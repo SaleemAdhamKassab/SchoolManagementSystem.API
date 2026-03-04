@@ -5,7 +5,7 @@ using SchoolProject.Core.Features.Students.Commands.Models;
 using SchoolProject.Data.Entities;
 using SchoolProject.Service.Abstracts;
 
-namespace SchoolProject.Core.Features.Students.Handlers
+namespace SchoolProject.Core.Features.Students.Commands.Handlers
 {
     public class AddStudentCommandHandler(
         IStudentService studentService,

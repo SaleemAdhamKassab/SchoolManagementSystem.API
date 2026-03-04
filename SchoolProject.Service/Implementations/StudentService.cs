@@ -28,17 +28,20 @@ public class StudentService(IStudentRepository studentRepository) : IStudentServ
 
     public async Task<string> AddAsync(Student student, CancellationToken cancellationToken)
     {
-        var studentResult = _studentRepository
-            .GetTableNoTracking()
-            .Where(e => e.FirstName == student.FirstName && e.LastName == student.LastName)
-            .FirstOrDefault();
-
-        if (studentResult != null)
-            return "Exists";
-
         await _studentRepository.AddAsync(student, cancellationToken);
-
-
         return "Success";
+    }
+
+    public async Task<bool> IsFullNameExist(string fullName)
+    {
+        var studentResult = _studentRepository
+           .GetTableNoTracking()
+           .Where(e => (e.FirstName + e.LastName).Trim().ToLower() == fullName.Trim().ToLower())
+           .FirstOrDefault();
+
+        if (studentResult == null)
+            return false;
+
+        return true;
     }
 }

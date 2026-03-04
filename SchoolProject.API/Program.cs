@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolProject.Core.Middleware;
 using SchoolProject.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = "swagger"; // default
     });
 }
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

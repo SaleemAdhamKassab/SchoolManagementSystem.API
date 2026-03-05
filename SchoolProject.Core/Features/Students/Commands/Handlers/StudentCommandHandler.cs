@@ -12,7 +12,8 @@ namespace SchoolProject.Core.Features.Students.Commands.Handlers
         IMapper mapper) :
         ResponseHandler,
         IRequestHandler<AddStudentCommand, Response<string>>,
-        IRequestHandler<EditStudentCommand, Response<string>>
+        IRequestHandler<EditStudentCommand, Response<string>>,
+        IRequestHandler<DeleteStudentCommand, Response<string>>
     {
         private readonly IStudentService _studentService = studentService;
         private readonly IMapper _mapper = mapper;
@@ -42,6 +43,21 @@ namespace SchoolProject.Core.Features.Students.Commands.Handlers
 
             if (result == "Success")
                 return Success($"Student with Id:{studentMapper.Id} edited successfully");
+
+            return BadRequest<string>();
+        }
+
+        public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
+        {
+            var student = await _studentService.GetStudentByIdAsync(request.Id, cancellationToken);
+
+            if (student == null)
+                return NotFound<string>($"Student with Id {request.Id} Not found!");
+
+            var result = await _studentService.DeleteAsync(student, cancellationToken);
+
+            if (result == "Success")
+                return Deleted<string>($"Student deleted successfully");
 
             return BadRequest<string>();
         }

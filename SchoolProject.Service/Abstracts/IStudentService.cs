@@ -10,4 +10,5 @@ public interface IStudentService
     Task<bool> IsFullNameExist(string fullName);
     Task<bool> IsFullNameExistExecludeSelf(string fullName, int id);
     Task<string> EditAsync(Student student, CancellationToken cancellationToken);
+    Task<string> DeleteAsync(Student student, CancellationToken cancellationToken);
 }

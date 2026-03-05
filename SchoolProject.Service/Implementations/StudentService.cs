@@ -63,4 +63,22 @@ public class StudentService(IStudentRepository studentRepository) : IStudentServ
         await _studentRepository.UpdateAsync(student, cancellationToken);
         return "Success";
     }
+
+    public async Task<string> DeleteAsync(Student student, CancellationToken cancellationToken)
+    {
+        var transaction = _studentRepository.BeginTransaction();
+
+        try
+        {
+            await _studentRepository.DeleteAsync(student, cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+            return "Success";
+
+        }
+        catch
+        {
+            transaction.Rollback();
+            return "Failed";
+        };
+    }
 }

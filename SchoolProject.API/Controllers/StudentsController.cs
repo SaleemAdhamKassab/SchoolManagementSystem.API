@@ -41,4 +41,12 @@ public class StudentsController : AppControllerBase
         var response = await Mediator.Send(command);
         return NewResult(response);
     }
+
+
+    [HttpDelete(Router.StudentRouting.Delete)]
+    public async Task<IActionResult> Delete([FromRoute] int id)
+    {
+        var response = await Mediator.Send(new DeleteStudentCommand(id));
+        return NewResult(response);
+    }
 }

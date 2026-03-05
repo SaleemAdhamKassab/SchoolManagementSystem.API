@@ -34,14 +34,33 @@ public class StudentService(IStudentRepository studentRepository) : IStudentServ
 
     public async Task<bool> IsFullNameExist(string fullName)
     {
-        var studentResult = _studentRepository
+        var studentResult = await _studentRepository
            .GetTableNoTracking()
            .Where(e => (e.FirstName + e.LastName).Trim().ToLower() == fullName.Trim().ToLower())
-           .FirstOrDefault();
+           .FirstOrDefaultAsync();
 
         if (studentResult == null)
             return false;
 
         return true;
+    }
+
+    public async Task<bool> IsFullNameExistExecludeSelf(string fullName, int id)
+    {
+        var studentResult = await _studentRepository
+          .GetTableNoTracking()
+          .Where(e => (e.FirstName + e.LastName).Trim().ToLower() == fullName.Trim().ToLower() && e.Id != id)
+          .FirstOrDefaultAsync();
+
+        if (studentResult == null)
+            return false;
+
+        return true;
+    }
+
+    public async Task<string> EditAsync(Student student, CancellationToken cancellationToken)
+    {
+        await _studentRepository.UpdateAsync(student, cancellationToken);
+        return "Success";
     }
 }
